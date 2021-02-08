@@ -4,18 +4,176 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDD8C5"
+    android:background="#FFFF"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/repostNumTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_text"
-        android:textColor="#E91E63"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/repostNum"
+        app:layout_constraintBottom_toBottomOf="@+id/repostButton"
+        app:layout_constraintStart_toEndOf="@+id/repostButton"
+        app:layout_constraintTop_toTopOf="@+id/repostButton" />
+
+    <TextView
+        android:id="@+id/seenNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seenNum"
+        app:layout_constraintBottom_toBottomOf="@+id/seenButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintStart_toEndOf="@+id/seenButton"
+        app:layout_constraintTop_toTopOf="@+id/seenButton" />
+
+    <ImageView
+        android:id="@+id/icon_imageView"
+        android:layout_width="60dp"
+        android:layout_height="57dp"
+        app:layout_constraintBottom_toTopOf="@+id/top_divider"
+        app:layout_constraintEnd_toStartOf="@+id/timeTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toTopOf="@+id/topGuideline"
+        app:layout_constraintVertical_bias="0.576"
+        app:srcCompat="@drawable/ic_netology_logo_foreground" />
+
+    <TextView
+        android:id="@+id/headerTextView"
+        android:layout_width="202dp"
+        android:layout_height="21dp"
+        android:layout_marginEnd="40dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/headerText"
+        app:layout_constraintEnd_toStartOf="@+id/moreButton"
+        app:layout_constraintTop_toTopOf="@+id/icon_imageView" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/timeTextview"
+        app:layout_constraintBottom_toBottomOf="@+id/icon_imageView"
+        app:layout_constraintStart_toStartOf="@+id/headerTextView"
+        app:layout_constraintTop_toBottomOf="@+id/headerTextView" />
+
+    <View
+        android:id="@+id/top_divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/timeTextView"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <ImageButton
+        android:id="@+id/moreButton"
+        android:layout_width="39dp"
+        android:layout_height="40dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/top_divider"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintTop_toTopOf="@+id/topGuideline"
+        app:layout_constraintVertical_bias="0.056"
+        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05109489" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.96" />
+
+    <TextView
+        android:id="@+id/longTextView"
+        android:layout_width="374dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/longTexview"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/top_divider" />
+
+    <View
+        android:id="@+id/botton_divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/longTextView" />
+
+    <ImageButton
+        android:id="@+id/likeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/botton_divider"
+        app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+
+    <TextView
+        android:id="@+id/likesNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/likesNum"
+        app:layout_constraintBottom_toBottomOf="@+id/likeButton"
+        app:layout_constraintStart_toEndOf="@+id/likeButton"
+        app:layout_constraintTop_toTopOf="@+id/likeButton" />
+
+    <ImageButton
+        android:id="@+id/repostButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/likesNumTextView"
+        app:layout_constraintStart_toEndOf="@+id/likesNumTextView"
+        app:layout_constraintTop_toTopOf="@+id/likesNumTextView"
+        app:srcCompat="@drawable/ic_baseline_share_24" />
+
+    <ImageButton
+        android:id="@+id/seenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/repostNumTextView"
+        app:layout_constraintStart_toEndOf="@+id/repostNumTextView"
+        app:layout_constraintTop_toTopOf="@+id/repostNumTextView"
+        app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
+
+    <View
+        android:id="@+id/lowest_divider"
+        android:layout_width="309dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="32dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="#EF4545"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/seenButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
