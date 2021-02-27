@@ -63,14 +63,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05109489" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/rightGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_percent="0.95"/>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/header_divider"
@@ -86,6 +86,9 @@
         android:textSize="12sp"
         android:layout_marginBottom="@dimen/common_spacing"
         android:layout_marginTop="@dimen/common_spacing"
+        android:layout_marginLeft="@dimen/common_spacing"
+        android:layout_marginRight="@dimen/common_spacing"
+
         app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintStart_toStartOf="@+id/leftGuideline"
         app:layout_constraintBottom_toTopOf="@+id/bottom_divider"
