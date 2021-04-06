@@ -8,6 +8,7 @@ import com.example.fitrstkotlinapp.databinding.ActivityMainBinding
 import com.example.fitrstkotlinapp.dto.Post
 import com.example.fitrstkotlinapp.viewmodel.PostViewModel
 import com.example.fitrstkotlinapp.viewmodel.kiloLogic
+import androidx.lifecycle.observe
 
 
 class MainActivity : AppCompatActivity() {
