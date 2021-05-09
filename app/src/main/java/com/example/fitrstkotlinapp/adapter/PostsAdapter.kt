@@ -12,12 +12,12 @@ import com.example.fitrstkotlinapp.databinding.CardPostBinding
 
 
 typealias OnLikeListener = (post: Post/*, itemId:String*/) -> Unit
-//typealias OnRepostListener = (post: Post) -> Unit
+typealias OnRepostListener = (post: Post) -> Unit
 
 
 class PostsAdapter(
-    private val onLikeListener: OnLikeListener//,
-    //private val OnRepostListener: OnRepostListener
+    private val onLikeListener: OnLikeListener,
+    private val onRepostListener: OnRepostListener
 ) : RecyclerView.Adapter<PostViewHolder>() {
     var list = emptyList<Post>()
         set(value) {
@@ -28,7 +28,7 @@ class PostsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(
-            binding, onLikeListener//,OnRepostListener
+            binding, onLikeListener,onRepostListener
         )
     }
 
@@ -42,8 +42,8 @@ class PostsAdapter(
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener//,
-    //private val OnRepostListener: OnRepostListener
+    private val onLikeListener: OnLikeListener,
+    private val onRepostListener: OnRepostListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -60,9 +60,9 @@ class PostViewHolder(
             likeButton.setOnClickListener {
                 onLikeListener(post /*, likeButton.id.toString()*/)
             }
-            //repostButton.setOnClickListener {
-            //    onLikeListener(post, repostButton.id.toString()
-            //  }
+            repostButton.setOnClickListener {
+                onRepostListener(post /*,, repostButton.id.toString()*/)
+              }
         }
     }
 }
