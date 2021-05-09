@@ -135,7 +135,8 @@ android:padding="@dimen/common_spacing">
         app:layout_constraintBottom_toBottomOf="@+id/repostNumTextView"
         app:layout_constraintStart_toEndOf="@+id/repostNumTextView"
         app:layout_constraintTop_toTopOf="@+id/repostNumTextView"
-        app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
+        app:srcCompat="@drawable/ic_baseline_remove_red_eye_24"
+        android:contentDescription="@string/description_post_seen"/>
 
     <TextView
         android:id="@+id/seenNumTextView"
@@ -143,7 +144,6 @@ android:padding="@dimen/common_spacing">
         android:layout_height="wrap_content"
         android:text="@string/seenNum"
         app:layout_constraintBottom_toBottomOf="@+id/seenButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuideline"
         app:layout_constraintStart_toEndOf="@+id/seenButton"
         app:layout_constraintTop_toTopOf="@+id/seenButton" />
 
