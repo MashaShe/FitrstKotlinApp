@@ -16,4 +16,10 @@
         что вам ближе и приходите к нам за знаниями и ростом.\n\n
         Перемены — всегда правильный выбор👌🏻   http://netolo.gy/fEU "</string>
 
+    <string name="description_post_author_avatar">Post author avatar</string>
+    <string name="description_post_menu">Post menu</string>
+    <string name="description_post_like">Like</string>
+    <string name="description_post_share">Share</string>
+    <string name="description_post_seen">Seen</string>
+
 </resources>
