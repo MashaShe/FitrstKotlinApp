@@ -2,48 +2,63 @@ package com.example.fitrstkotlinapp.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.fitrstkotlinapp.viewmodel.kiloLogic
-
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.example.fitrstkotlinapp.dto.Post
 import com.example.fitrstkotlinapp.R
 import com.example.fitrstkotlinapp.databinding.CardPostBinding
 
+//typealias OnLikeListener = (post: Post/*, itemId:String*/) -> Unit
+//typealias OnRepostListener = (post: Post) -> Unit
+//typealias OnRemoveListener = (post: Post) -> Unit
 
-typealias OnLikeListener = (post: Post/*, itemId:String*/) -> Unit
-typealias OnRepostListener = (post: Post) -> Unit
-
+//interface OnInteractionListener {
+//    fun onLike(post: Post) {}
+//    fun onEdit(post: Post) {}
+//    fun onRemove(post: Post) {}
+//    fun onRepost(post: Post) {}
+//
+//}
 
 class PostsAdapter(
-    private val onLikeListener: OnLikeListener,
-    private val onRepostListener: OnRepostListener
-) : RecyclerView.Adapter<PostViewHolder>() {
-    var list = emptyList<Post>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    private val onInteractionListener: OnInteractionListener
+//    private val onLikeListener: OnLikeListener,
+//    private val onRepostListener: OnRepostListener,
+//    private val onRemoveListener: OnRemoveListener
+
+) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
+//    var list = emptyList<Post>()
+//        set(value) {
+//            field = value
+//            notifyDataSetChanged()
+//        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(
-            binding, onLikeListener,onRepostListener
+            binding, /*-onLikeListener, onRepostListener, onRemoveListener--*/
+            onInteractionListener
         )
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val post = list[position]
+        val post = getItem(position)
         holder.bind(post)
     }
 
-    override fun getItemCount(): Int = list.size
+    // override fun getItemCount(): Int = list.size
 }
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onRepostListener: OnRepostListener
+//    private val onLikeListener: OnLikeListener,
+//    private val onRepostListener: OnRepostListener,
+//    private val onRemoveListener: OnRemoveListener
+    private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -58,14 +73,43 @@ class PostViewHolder(
             )
 
             likeButton.setOnClickListener {
-                onLikeListener(post /*, likeButton.id.toString()*/)
+                onInteractionListener.onLike(post /*, likeButton.id.toString()*/)
+                // onLikeListener(post)
             }
             repostButton.setOnClickListener {
-                onRepostListener(post /*,, repostButton.id.toString()*/)
-              }
+                //onRepostListener(post)
+                onInteractionListener.onRepost(post /*,, repostButton.id.toString()*/)
+            }
+//            saveButton.setOnClickListener{
+//                OnInteractionListener.onEdit(post)
+//            }
+
+
+            moreButton.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+                                onInteractionListener.onRemove(post)
+                                //    onRemoveListener(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+
+                            else -> false
+                        }
+                    }
+                }.show()
+
+            }
+
+
         }
     }
-}
 
 //    binding.likeButton.setOnClickListener {
 //        viewModel.like()
@@ -73,6 +117,8 @@ class PostViewHolder(
 //    binding.repostButton.setOnClickListener{
 //        viewModel.repost()
 //    }
+
+}
 
 class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
     override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {

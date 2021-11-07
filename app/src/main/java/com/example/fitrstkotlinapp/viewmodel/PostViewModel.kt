@@ -1,14 +1,47 @@
 package com.example.fitrstkotlinapp.viewmodel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.fitrstkotlinapp.dto.Post
 import com.example.fitrstkotlinapp.repository.PostRepository
 import com.example.fitrstkotlinapp.repository.PostRepositoryInMemoryImpl
 
+val emptyPost = Post(
+    id = 0L,
+    author = "",
+    content = "",
+    published = "",
+    likes = 0,
+    likedByMe = false,
+    reposts = 0
+)
 class PostViewModel : ViewModel() {
-    // упрощённый вариант
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
     val data = repository.getAll()
+    val edited = MutableLiveData(emptyPost)
+
     fun likeById(id: Long) = repository.likeById(id)
     fun repostById(id:Long) = repository.repostById(id)
+    fun removeById(id:Long) = repository.removeById(id)
+
+    fun save() {
+        edited.value?.let {
+            repository.save(it)
+        }
+        edited.value = emptyPost
+    }
+
+    fun edit(post: Post) {
+        edited.value = post
+    }
+
+    fun changeContent(content: String) {
+        val text = content.trim()
+        if (edited.value?.content == text) {
+            return
+        }
+        edited.value = edited.value?.copy(content = text)
+    }
+
 }
 
 fun kiloLogic(num: Int): String {
@@ -23,3 +56,5 @@ fun kiloLogic(num: Int): String {
 
     return returning
 }
+
+

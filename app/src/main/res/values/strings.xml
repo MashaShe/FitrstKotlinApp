@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NMedia</string>
+    <string name="app_name" translatable="false">NMedia</string>
     <string name="main_text">NMedia!</string>
     <string name="headerText">Netology. Online University</string>
     <string name="timeTextview">23 May, 18:36</string>
@@ -21,5 +21,13 @@
     <string name="description_post_like">Like</string>
     <string name="description_post_share">Share</string>
     <string name="description_post_seen">Seen</string>
+    <string name="description_post_save">Save</string>
+
+    <string name="error_empty_content">Content cannot be empty</string>
+    <string name="post_text">Enter text here</string>
+    <string name="editText">Edit Message</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_remove">Remove</string>
+
 
 </resources>
