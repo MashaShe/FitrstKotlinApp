@@ -80,13 +80,13 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     override fun likeById(id: Long) {
         data.value = data.value?.map {
-            if (it.id != id) it else if (it.likedByMe == false) it.copy(
+            if (it.id != id) it else if (!it.likedByMe) it.copy(
                 likedByMe = !it.likedByMe,
                 likes = it.likes + 1,
                 seen = it.seen + 1
             ) else it.copy(likedByMe = !it.likedByMe, likes = it.likes - 1, seen = it.seen + 1)
         }
-     }
+    }
 
     override fun repostById(id: Long) {
         data.value = data.value?.map {
@@ -106,7 +106,15 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 data.value.orEmpty()
                     .toMutableList()
                     .apply {
-                        add(0, post.copy(id = nextId++,author = "Me",likedByMe = false, published = "now"))
+                        add(
+                            0,
+                            post.copy(
+                                id = nextId++,
+                                author = "Me",
+                                likedByMe = false,
+                                published = "now"
+                            )
+                        )
                     }
             return
         }
