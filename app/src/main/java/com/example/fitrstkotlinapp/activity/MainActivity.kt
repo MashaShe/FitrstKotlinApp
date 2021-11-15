@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         binding.cancelButton.setOnClickListener {
             with(binding.content) {
                 setText("")
+                viewModel.cancel()
                 clearFocus()
                 AndroidUtils.hideKeyboard(this)
                 binding.group.visibility = View.GONE
