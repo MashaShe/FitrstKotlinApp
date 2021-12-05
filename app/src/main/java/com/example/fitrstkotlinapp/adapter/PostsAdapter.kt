@@ -37,12 +37,12 @@ class PostViewHolder(
             headerTextView.text = post.author
             timeTextView.text = post.published
             longTextView.text = post.content
-            repostNumTextView.text = kiloLogic(post.reposts)
-            likesNumTextView.text = kiloLogic(post.likes)
+            likeButton.text = kiloLogic(post.likes)
+            likeButton.isChecked=post.likedByMe
+            repostButton.text = kiloLogic(post.reposts)
             seenNumTextView.text = kiloLogic(post.seen)
-            likeButton.setImageResource(
-                if (post.likedByMe) R.drawable.ic_baseline_favorite_filled_24 else R.drawable.ic_baseline_favorite_border_24
-            )
+
+
             likeButton.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
