@@ -77,12 +77,22 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         tools:text="@sample/posts.json/data/content" />
 
+
+    <ImageButton
+        android:id="@+id/videoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/video_view_button_foreground"
+        app:layout_constraintTop_toBottomOf="@id/longTextView"
+        app:layout_constraintBottom_toTopOf="@+id/footer"
+        />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="longTextView" />
+        app:constraint_referenced_ids="videoButton" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -131,6 +141,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/seenButton"
         app:layout_constraintStart_toEndOf="@+id/seenButton"
         app:layout_constraintTop_toTopOf="@+id/seenButton" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

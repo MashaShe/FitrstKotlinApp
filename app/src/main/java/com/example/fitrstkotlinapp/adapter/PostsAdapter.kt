@@ -46,9 +46,16 @@ class PostViewHolder(
             likeButton.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
-            repostButton.setOnClickListener {
-                onInteractionListener.onRepost(post)
+
+           repostButton.setOnClickListener {
+               onInteractionListener.onRepost(post)
+               onInteractionListener.onShare(post)
             }
+
+            videoButton.setOnClickListener{
+                onInteractionListener.onVideo(post)
+            }
+
 
             moreButton.setOnClickListener {
                 PopupMenu(it.context, it).apply {
