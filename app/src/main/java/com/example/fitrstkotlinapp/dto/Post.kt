@@ -1,6 +1,9 @@
 package com.example.fitrstkotlinapp.dto
 
-data class Post(
+import android.os.Parcel
+import android.os.Parcelable
+
+data class Post (
     val id: Long,
     val author: String,
     val content: String,
@@ -8,6 +11,7 @@ data class Post(
     val likes: Int = 0,
     val likedByMe: Boolean = false,
     val reposts: Int = 0,
-    val seen: Int = likes + reposts
+    val seen: Int = likes + reposts,
+    val video: String? = null
 
 )

@@ -1,8 +1,10 @@
 package com.example.fitrstkotlinapp.adapter
 
+import android.opengl.Visibility
 import androidx.recyclerview.widget.DiffUtil
 import com.example.fitrstkotlinapp.viewmodel.kiloLogic
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.fitrstkotlinapp.dto.Post
 import com.example.fitrstkotlinapp.R
 import com.example.fitrstkotlinapp.databinding.CardPostBinding
+import kotlinx.android.synthetic.main.card_post.view.*
 
 
 class PostsAdapter(
@@ -37,18 +40,31 @@ class PostViewHolder(
             headerTextView.text = post.author
             timeTextView.text = post.published
             longTextView.text = post.content
-            repostNumTextView.text = kiloLogic(post.reposts)
-            likesNumTextView.text = kiloLogic(post.likes)
+            likeButton.text = kiloLogic(post.likes)
+            likeButton.isChecked=post.likedByMe
+            repostButton.text = kiloLogic(post.reposts)
             seenNumTextView.text = kiloLogic(post.seen)
-            likeButton.setImageResource(
-                if (post.likedByMe) R.drawable.ic_baseline_favorite_filled_24 else R.drawable.ic_baseline_favorite_border_24
-            )
+
+            if (post.video.isNullOrEmpty()){
+                videoButton.visibility = View.GONE
+            }
+            else videoButton.visibility = View.VISIBLE
+
+
+
             likeButton.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
-            repostButton.setOnClickListener {
-                onInteractionListener.onRepost(post)
+
+           repostButton.setOnClickListener {
+               onInteractionListener.onRepost(post)
+               onInteractionListener.onShare(post)
             }
+
+            videoButton.setOnClickListener{
+                onInteractionListener.onVideo(post)
+            }
+
 
             moreButton.setOnClickListener {
                 PopupMenu(it.context, it).apply {

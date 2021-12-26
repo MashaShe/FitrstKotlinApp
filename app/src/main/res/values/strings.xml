@@ -28,6 +28,8 @@
     <string name="editText">Edit Message</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_remove">Remove</string>
+    <string name="add_post">Add post</string>
+    <string name="chooser_share_post">Share post</string>
 
 
 </resources>
