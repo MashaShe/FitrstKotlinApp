@@ -1,4 +1,5 @@
 package com.example.fitrstkotlinapp.viewmodel
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.fitrstkotlinapp.dto.Post
@@ -45,6 +46,14 @@ class PostViewModel : ViewModel() {
         }
         edited.value = edited.value?.copy(content = text)
     }
+
+//    fun setVideoVisibility(post:Post): Int {
+//        var returning =  View.GONE
+//        if (!post.video.isNullOrEmpty()){
+//          var returning = View.VISIBLE
+//        }
+//        return returning
+//    }
 
 }
 

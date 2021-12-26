@@ -1,8 +1,10 @@
 package com.example.fitrstkotlinapp.adapter
 
+import android.opengl.Visibility
 import androidx.recyclerview.widget.DiffUtil
 import com.example.fitrstkotlinapp.viewmodel.kiloLogic
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.fitrstkotlinapp.dto.Post
 import com.example.fitrstkotlinapp.R
 import com.example.fitrstkotlinapp.databinding.CardPostBinding
+import kotlinx.android.synthetic.main.card_post.view.*
 
 
 class PostsAdapter(
@@ -41,6 +44,12 @@ class PostViewHolder(
             likeButton.isChecked=post.likedByMe
             repostButton.text = kiloLogic(post.reposts)
             seenNumTextView.text = kiloLogic(post.seen)
+
+            if (post.video.isNullOrEmpty()){
+                videoButton.visibility = View.GONE
+            }
+            else videoButton.visibility = View.VISIBLE
+
 
 
             likeButton.setOnClickListener {

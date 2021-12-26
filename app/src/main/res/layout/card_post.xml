@@ -83,8 +83,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/video_view_button_foreground"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/longTextView"
         app:layout_constraintBottom_toTopOf="@+id/footer"
+
         />
 
     <androidx.constraintlayout.widget.Barrier

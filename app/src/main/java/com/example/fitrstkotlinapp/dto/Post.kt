@@ -12,6 +12,6 @@ data class Post (
     val likedByMe: Boolean = false,
     val reposts: Int = 0,
     val seen: Int = likes + reposts,
-    val video: String = "https://www.youtube.com/watch?v=WhWc3b3KhnY\""
+    val video: String? = null
 
 )

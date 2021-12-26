@@ -22,6 +22,7 @@ import com.example.fitrstkotlinapp.util.AndroidUtils
 import androidx.activity.result.ActivityResultLauncher
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.activity.result.contract.ActivityResultContract
+import kotlinx.android.synthetic.main.card_post.view.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,8 +35,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val adapter = PostsAdapter(object : OnInteractionListener {
-            // override fun onEdit(post: Post) {
-//                viewModel.edit(post)}
+
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
             }
@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
             override fun onRepost(post: Post) {
                 viewModel.repostById(post.id)
             }
+
 
             override fun onShare(post: Post) {
                 val myIntent = Intent().apply {
@@ -61,8 +62,17 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onVideo(post: Post) {
-                val videoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
-                startActivity(videoIntent)
+                if (post.video.isNullOrEmpty()){
+                    Toast.makeText(
+                        this@MainActivity,
+                        "No video",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else {
+                    val videoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+                    startActivity(videoIntent)
+                }
             }
 
             override fun onEdit(post: Post) {
@@ -77,7 +87,10 @@ class MainActivity : AppCompatActivity() {
         binding.list.adapter = adapter
         viewModel.data.observe(this, { posts ->
             adapter.submitList(posts)
+
         })
+
+
 //        viewModel.edited.observe(this) {
 //            binding.content.setText(it.content)
 //            if (it.content.isNotBlank()) {
@@ -97,6 +110,38 @@ class MainActivity : AppCompatActivity() {
 //            viewModel.changeContent(result.toString())
 //            viewModel.save()
 //        }
+
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            newPostRequestCode -> {
+                if (resultCode != Activity.RESULT_OK) {
+                    return
+                }
+                data?.getStringExtra(Intent.EXTRA_TEXT)?.let {
+                    viewModel.changeContent(it)
+                    viewModel.save()
+
+                }
+            }
+
+            editPostRequestCode -> {
+                if (resultCode != Activity.RESULT_OK) {
+                    return
+                }
+                val editedContent = data?.getStringExtra(Intent.EXTRA_TEXT)!!
+                viewModel.changeContent(editedContent)
+                viewModel.save()
+
+            }
+        }
+    }
+}
+// override fun onEdit(post: Post) {
+//                viewModel.edit(post)}
 
 
 //        binding.saveButton.setOnClickListener {
@@ -128,35 +173,4 @@ class MainActivity : AppCompatActivity() {
 //                binding.group.visibility = View.GONE
 //            }
 //        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            newPostRequestCode -> {
-                if (resultCode != Activity.RESULT_OK) {
-                    return
-                }
-                data?.getStringExtra(Intent.EXTRA_TEXT)?.let {
-                    viewModel.changeContent(it)
-                    viewModel.save()
-
-                }
-            }
-
-            editPostRequestCode -> {
-                if (resultCode != Activity.RESULT_OK) {
-                    return
-                }
-                val editedContent = data?.getStringExtra(Intent.EXTRA_TEXT)!!
-                viewModel.changeContent(editedContent)
-                viewModel.save()
-
-            }
-        }
-    }
-}
-
-
-
 
